@@ -14,6 +14,7 @@ import {
 } from "../assets/imgs";
 
 import { useNavigate } from "react-router-dom";
+import { Alert, Space } from "antd";
 
 function PlaylistDetelis({
   setPlayingTrack,
@@ -24,6 +25,7 @@ function PlaylistDetelis({
   const { PlaylistDetelis } = FetchZustand();
   const nav = useNavigate();
   const length = PlaylistDetelis.tracks?.items?.length;
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setIsPlaying(true);
@@ -50,6 +52,7 @@ function PlaylistDetelis({
   };
 
   const likedsong = (track) => {
+    setLoading(true);
     try {
       const likedSongs = JSON.parse(localStorage.getItem("liked_songs")) || [];
       const isLiked = likedSongs.some(
@@ -61,11 +64,33 @@ function PlaylistDetelis({
       }
     } catch (error) {
       console.error("Error adding liked song to localStorage:", error);
+    } finally {
+      setTimeout(() => {
+        setLoading(false);
+      }, 1500);
     }
   };
 
   return (
     <div className="playlist_detelis">
+      <div>
+        {loading && (
+          <Space
+            direction="vertical"
+            style={{
+              position: "fixed",
+              top: 40,
+              left: "400px",
+              right: "400px",
+              bottom: 0,
+              zIndex: 1000,
+              width: "50%",
+            }}
+          >
+            <Alert message="Success Tips" type="success" showIcon />
+          </Space>
+        )}
+      </div>
       <div className="actions_playlist">
         <div className="imgs">
           <img onClick={() => nav(-1)} src={back} alt="" />

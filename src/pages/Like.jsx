@@ -13,14 +13,17 @@ import {
   prev,
   pusk,
 } from "../assets/imgs";
+import { Alert, Space } from "antd";
 
 function Like({ playingTrack, setPlayingTrack, isPlaying, setIsPlaying }) {
   const nav = useNavigate();
   const [likedSongs, setLikedSongs] = useState(
     JSON.parse(localStorage.getItem("liked_songs")) || []
   );
+  const [loading, setLoading] = useState(false);
 
   const unlikeSong = (track) => {
+    setLoading(true);
     try {
       const updatedLikedSongs = likedSongs.filter(
         (likedSong) => likedSong.id !== track.id
@@ -31,6 +34,10 @@ function Like({ playingTrack, setPlayingTrack, isPlaying, setIsPlaying }) {
       setLikedSongs(updatedLikedSongs);
     } catch (error) {
       console.error("Error removing liked song from localStorage:", error);
+    } finally {
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
     }
   };
 
@@ -58,6 +65,24 @@ function Like({ playingTrack, setPlayingTrack, isPlaying, setIsPlaying }) {
   console.log(likedSongs);
   return (
     <div className="like_detelis">
+      <div>
+        {loading && (
+          <Space
+            direction="vertical"
+            style={{
+              position: "fixed",
+              top: 40,
+              left: "400px",
+              right: "400px",
+              bottom: 0,
+              zIndex: 1000,
+              width: "50%",
+            }}
+          >
+            <Alert message="Success Tips" type="success" showIcon />
+          </Space>
+        )}
+      </div>
       <div className="actions_playlist">
         <div className="imgs">
           <img onClick={() => nav(-1)} src={back} alt="" />
@@ -129,7 +154,9 @@ function Like({ playingTrack, setPlayingTrack, isPlaying, setIsPlaying }) {
                     <td className="albom_name">
                       <TruncateText text={item.album.name} maxLength={8} />
                     </td>
-                    <td onClick={()=>unlikeSong(item)} className="like_td">UnLike</td>
+                    <td onClick={() => unlikeSong(item)} className="like_td">
+                      UnLike
+                    </td>
                     <td className="reels">{item.album.release_date}</td>
                     <td className="duration_ms">
                       {formatDuration(item.duration_ms)}

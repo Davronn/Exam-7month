@@ -17,9 +17,15 @@ import ReactPlayer from "react-player";
 function PlaylistDetelis() {
   const { PlaylistDetelis } = FetchZustand();
   const [playingTrack, setPlayingTrack] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  useEffect(() => {
+    setIsPlaying(true);
+  }, [playingTrack]);
 
   const playTrack = (track) => {
     setPlayingTrack(track);
+    setIsPlaying(!isPlaying);
     console.log(track);
   };
 
@@ -132,7 +138,7 @@ function PlaylistDetelis() {
             <ReactPlayer
               url={playingTrack}
               controls
-              playing
+              playing={isPlaying}
               width="0"
               height="0"
               style={{ display: "block" }}

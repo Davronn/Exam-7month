@@ -24,9 +24,9 @@ function Home() {
     getPlaylistDetelis,
   } = FetchZustand();
 
-  const toPlaylist = (playlist) => {
-    getPlaylistDetelis(playlist);
-    nav("/playlist");
+  const toPlaylist = async (playlistId) => {
+    await getPlaylistDetelis(playlistId);
+    nav(`/playlist`);
   };
 
   useEffect(() => {

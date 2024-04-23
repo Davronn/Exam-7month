@@ -26,7 +26,7 @@ export const FetchZustand = create((set) => ({
   Recentlyplayed: [],
   Jumpbackin: [],
   Uniquellyyours: [],
-  PlaylistDetelis: [],
+  PlaylistDetelis: {},
   setAccessToken: (token) => set((state) => ({ ...state, accessToken: token })),
   setPlaylistDetelis: (playlist) =>
     set((state) => ({ ...state, PlaylistDetelis: playlist })),

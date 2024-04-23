@@ -1,10 +1,20 @@
 import React, { useEffect } from "react";
 import "../scss/Playlist.scss";
 import { FetchZustand } from "../app/FetchZustand";
-import { back, like_playlist, play, prev } from "../assets/imgs";
+import {
+  back,
+  clock,
+  dowload,
+  like_playlist,
+  others,
+  play,
+  prev,
+  pusk,
+} from "../assets/imgs";
 
 function PlaylistDetelis() {
   const { PlaylistDetelis } = FetchZustand();
+  console.log(PlaylistDetelis);
 
   const TruncateText = ({ text = "Text not provided", maxLength }) => {
     const truncatedText =
@@ -42,36 +52,41 @@ function PlaylistDetelis() {
           <div className="actions_m">
             <img src={play} alt="" />
             <img src={like_playlist} alt="" />
+            <img src={dowload} alt="" />
+            <img src={others} alt="" />
           </div>
-          <div className="pusk"></div>
+          <div className="pusk">
+            <img src={pusk} alt="" />
+          </div>
         </div>
-        <div className="music_actions">
-          <div className="actions_m">
-            <img src={play} alt="" />
-            <img src={like_playlist} alt="" />
-          </div>
-          <div className="pusk"></div>
-        </div>
-        <div className="music_actions">
-          <div className="actions_m">
-            <img src={play} alt="" />
-            <img src={like_playlist} alt="" />
-          </div>
-          <div className="pusk"></div>
-        </div>
-        <div className="music_actions">
-          <div className="actions_m">
-            <img src={play} alt="" />
-            <img src={like_playlist} alt="" />
-          </div>
-          <div className="pusk"></div>
-        </div>
-        <div className="music_actions">
-          <div className="actions_m">
-            <img src={play} alt="" />
-            <img src={like_playlist} alt="" />
-          </div>
-          <div className="pusk"></div>
+        <div className="tracks">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>TITLE</th>
+                <th>ALBUM</th>
+                <th>DATA ADDED</th>
+                <th>
+                  <img src={clock} alt="" />
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {PlaylistDetelis.tracks.items.map((item, index) => (
+                <tr key={index}>
+                  <td>{index + 1}</td>
+                  <td>{item.track.name},{item.track.album.release_date}</td>
+                  <td>{item.track.album.name}</td>
+                  <td>{item.track.album.release_date}</td>
+                  <td>{item.track.duration_ms}</td>
+                  <td>
+                    <img src={clock} alt="" />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

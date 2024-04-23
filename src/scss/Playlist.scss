@@ -69,6 +69,7 @@
   .bg-black {
     background-color: rgba(18, 18, 18, 1);
     padding: 10px 40px;
+    margin-bottom: 70px;
     .music_actions {
       display: flex;
       justify-content: space-between;
@@ -88,17 +89,43 @@
       }
     }
     .tracks {
-      .index{
+      .index {
         width: 30px;
       }
-      .name{
+      .name {
         width: 300px;
+        height: 40px;
         display: flex;
         align-items: center;
+        .art_name {
+          color: #ffffff8b;
+        }
       }
-      thead{
-        tr{
-          td{
+      .albom_name {
+        width: 100px;
+      }
+      .like {
+        width: 200px;
+      }
+      .reels {
+        width: 200px;
+      }
+      .duration_ms {
+        width: 100px;
+      }
+      .like_td {
+        width: 150px;
+        display: flex;
+        margin-left: 50px;
+        cursor: pointer;
+      }
+      .like_td:hover {
+        color: rgba(101, 211, 110, 1);
+        transition: 0.3s;
+      }
+      thead {
+        tr {
+          td {
             font-size: 16px;
             font-weight: 500;
             line-height: 20.24px;
@@ -107,13 +134,14 @@
           }
         }
       }
-      tbody{
-        tr{
-          td{
+      tbody {
+        .tr {
+          align-items: center !important;
+          td {
             margin-bottom: 20px !important;
             color: #e8e8e8;
-            img{
-              margin-right: 5px;
+            img {
+              margin-right: 8px;
             }
           }
         }

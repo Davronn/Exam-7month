@@ -23,6 +23,13 @@ function PlaylistDetelis() {
     return <span>{truncatedText}</span>;
   };
 
+  const formatDuration = (duration_ms) => {
+    const totalSeconds = Math.floor(duration_ms / 1000);
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+  };
+
   return (
     <div className="playlist_detelis">
       <div className="actions_playlist">
@@ -66,6 +73,7 @@ function PlaylistDetelis() {
                 <td className="index">#</td>
                 <td className="name">TITLE</td>
                 <td className="albom_name">ALBUM</td>
+                <td className="like_td"></td>
                 <td className="reels">DATA ADDED</td>
                 <td className="duration_ms">
                   <img src={clock} alt="" />
@@ -73,22 +81,31 @@ function PlaylistDetelis() {
               </tr>
             </thead>
             <tbody>
-              {PlaylistDetelis.tracks.items.map((item, index) => (
-                <tr key={index}>
-                  <td className="index">{index + 1}</td>
-                  <td className="name">
-                    <img src={item.track.album.images[0].url} alt="" />
-                    <span>
-                      <TruncateText text={item.track.name} maxLength={15} />
-                      <br></br>
-                      {item.track.album.release_date}
-                    </span>
-                  </td>
-                  <td className="albom_name">{item.track.album.name}</td>
-                  <td className="reels">{item.track.album.release_date}</td>
-                  <td className="duration_ms">{item.track.duration_ms}</td>
-                </tr>
-              ))}
+              {PlaylistDetelis.tracks &&
+                PlaylistDetelis.tracks.items.map((item, index) => (
+                  <tr className="tr" key={index}>
+                    <td className="index">{index + 1}</td>
+                    <td className="name">
+                      <img src={item.track.album.images[0].url} alt="" />
+                      <span>
+                        <TruncateText text={item.track.name} maxLength={15} />
+                        <br></br>
+                        <span className="art_name">{item.track.album.artists[0].name}</span>
+                      </span>
+                    </td>
+                    <td className="albom_name">
+                      <TruncateText
+                        text={item.track.album.name}
+                        maxLength={8}
+                      />
+                    </td>
+                    <td className="like_td">Like</td>
+                    <td className="reels">{item.track.album.release_date}</td>
+                    <td className="duration_ms">
+                      {formatDuration(item.track.duration_ms)}
+                    </td>
+                  </tr>
+                ))}
             </tbody>
           </table>
         </div>

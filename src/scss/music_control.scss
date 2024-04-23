@@ -1,0 +1,13 @@
+.music_control {
+  position: fixed;
+  bottom: 0px;
+  background-color: aqua;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  height: 70px;
+  align-items: center;
+  .music_pleyer{
+    display: flex;
+  }
+}

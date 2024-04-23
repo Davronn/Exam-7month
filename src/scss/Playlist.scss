@@ -90,28 +90,70 @@
     }
     .tracks {
       .index {
-        width: 30px;
+        font-size: 22px;
+        width: 40px;
+        height: 20px;
+        .box1,
+        .box2 {
+          padding: 6px 0px;
+          text-align: center;
+        }
+
+        .box1 {
+          display: block;
+        }
+
+        .box2 {
+          width: 100%;
+          display: none;
+          img {
+            width: 19px;
+            height: 19px;
+            cursor: pointer;
+          }
+        }
+
+        .wrapper {
+          width: auto;
+          display: inline-block;
+        }
+
+        .wrapper:hover .box1 {
+          display: none;
+        }
+
+        .wrapper:hover .box2 {
+          display: block;
+          cursor: pointer;
+        }
       }
       .name {
         width: 300px;
         height: 40px;
         display: flex;
         align-items: center;
+        font-size: 14px;
         .art_name {
           color: #ffffff8b;
         }
       }
       .albom_name {
         width: 100px;
+        font-size: 14px;
+
       }
       .like {
         width: 200px;
       }
       .reels {
         width: 200px;
+        font-size: 14px;
+
       }
       .duration_ms {
         width: 100px;
+        font-size: 14px;
+
       }
       .like_td {
         width: 150px;

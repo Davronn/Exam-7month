@@ -1,14 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import ReactPlayer from "react-player";
 import "../scss/music_control.scss";
 
 function MusicControl() {
   return (
     <div className="music_control">
-      <div className="music_pleyer">
-        <h1>footer</h1>
-        <audio controls>
-          <source src="test.mp3" type="audio/mpeg" />
-        </audio>
+      <div className="music">
+        <h1>music</h1>
       </div>
     </div>
   );

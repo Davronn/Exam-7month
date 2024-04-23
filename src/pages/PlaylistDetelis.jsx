@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../scss/Playlist.scss";
 import { FetchZustand } from "../app/FetchZustand";
 import {
@@ -8,13 +8,20 @@ import {
   like_playlist,
   others,
   play,
+  play_music,
   prev,
   pusk,
 } from "../assets/imgs";
+import ReactPlayer from "react-player";
 
 function PlaylistDetelis() {
   const { PlaylistDetelis } = FetchZustand();
-  console.log(PlaylistDetelis);
+  const [playingTrack, setPlayingTrack] = useState(null);
+
+  const playTrack = (track) => {
+    setPlayingTrack(track);
+    console.log(track);
+  };
 
   const TruncateText = ({ text = "Text not provided", maxLength }) => {
     const truncatedText =
@@ -84,13 +91,26 @@ function PlaylistDetelis() {
               {PlaylistDetelis.tracks &&
                 PlaylistDetelis.tracks.items.map((item, index) => (
                   <tr className="tr" key={index}>
-                    <td className="index">{index + 1}</td>
+                    <td className="index">
+                      <span className="wrapper">
+                        <span className="box1">{index + 1}</span>
+                        <span className="box2">
+                          <img
+                            src={play_music}
+                            alt=""
+                            onClick={() => playTrack(item.track.preview_url)}
+                          />
+                        </span>
+                      </span>
+                    </td>
                     <td className="name">
                       <img src={item.track.album.images[0].url} alt="" />
                       <span>
                         <TruncateText text={item.track.name} maxLength={15} />
                         <br></br>
-                        <span className="art_name">{item.track.album.artists[0].name}</span>
+                        <span className="art_name">
+                          {item.track.album.artists[0].name}
+                        </span>
                       </span>
                     </td>
                     <td className="albom_name">
@@ -108,6 +128,16 @@ function PlaylistDetelis() {
                 ))}
             </tbody>
           </table>
+          {playingTrack && (
+            <ReactPlayer
+              url={playingTrack}
+              controls
+              playing
+              width="0"
+              height="0"
+              style={{ display: "block" }}
+            />
+          )}
         </div>
       </div>
     </div>

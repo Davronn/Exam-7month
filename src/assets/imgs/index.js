@@ -14,6 +14,7 @@ import like_playlist from "./Like_playlist.svg";
 import others from "./others .svg";
 import dowload from "./dowload_playlist.svg";
 import clock from "./clock.svg";
+import play_music from "./play.svg"
 
 export {
   home,
@@ -32,4 +33,5 @@ export {
   others,
   dowload,
   clock,
+  play_music
 };

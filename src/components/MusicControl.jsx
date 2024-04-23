@@ -1,13 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ReactPlayer from "react-player";
-import "../scss/music_control.scss";
+import "../scss/music_control.scss"
 
-function MusicControl() {
+function MusicControl({ playingTrack, isPlaying }) {
   return (
     <div className="music_control">
-      <div className="music">
-        <h1>music</h1>
-      </div>
+      <ReactPlayer
+        url={playingTrack}
+        controls
+        playing={isPlaying}
+        width="500px"
+        height="30px"
+        style={{
+          display: "inline-block",
+          zIndex:"10",
+        }}
+      />
     </div>
   );
 }

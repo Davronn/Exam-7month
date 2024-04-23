@@ -13,11 +13,18 @@ import {
   pusk,
 } from "../assets/imgs";
 import ReactPlayer from "react-player";
+import MusicControl from "../components/MusicControl";
 
-function PlaylistDetelis() {
+function PlaylistDetelis({
+  setPlayingTrack,
+  setIsPlaying,
+  playingTrack,
+  isPlaying,
+}) {
   const { PlaylistDetelis } = FetchZustand();
-  const [playingTrack, setPlayingTrack] = useState(null);
-  const [isPlaying, setIsPlaying] = useState(false);
+  console.log(PlaylistDetelis.tracks.items.length);
+
+  const length = PlaylistDetelis.tracks.items.length;
 
   useEffect(() => {
     setIsPlaying(true);
@@ -64,7 +71,9 @@ function PlaylistDetelis() {
             <TruncateText text={PlaylistDetelis.name} maxLength={8} />
           </h1>
           <p className="dec">{PlaylistDetelis.description}</p>
-          <p className="dec">Made for davedirect3 . 34 songs, 2hr 01 min</p>
+          <p className="dec">
+            Made for davedirect3 . {length && length} songs, 2hr 01 min
+          </p>
         </div>
       </div>
       <div className="bg-black">
@@ -134,18 +143,9 @@ function PlaylistDetelis() {
                 ))}
             </tbody>
           </table>
-          {playingTrack && (
-            <ReactPlayer
-              url={playingTrack}
-              controls
-              playing={isPlaying}
-              width="0"
-              height="0"
-              style={{ display: "block" }}
-            />
-          )}
         </div>
       </div>
+      {/* <MusicControl playingTrack={playingTrack} isPlaying={isPlaying} /> */}
     </div>
   );
 }

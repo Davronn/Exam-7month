@@ -88,9 +88,17 @@
       }
     }
     .tracks {
+      .index{
+        width: 30px;
+      }
+      .name{
+        width: 300px;
+        display: flex;
+        align-items: center;
+      }
       thead{
         tr{
-          th{
+          td{
             font-size: 16px;
             font-weight: 500;
             line-height: 20.24px;
@@ -102,7 +110,11 @@
       tbody{
         tr{
           td{
+            margin-bottom: 20px !important;
             color: #e8e8e8;
+            img{
+              margin-right: 5px;
+            }
           }
         }
       }

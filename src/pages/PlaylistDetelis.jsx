@@ -63,26 +63,30 @@ function PlaylistDetelis() {
           <table>
             <thead>
               <tr>
-                <th>#</th>
-                <th>TITLE</th>
-                <th>ALBUM</th>
-                <th>DATA ADDED</th>
-                <th>
+                <td className="index">#</td>
+                <td className="name">TITLE</td>
+                <td className="albom_name">ALBUM</td>
+                <td className="reels">DATA ADDED</td>
+                <td className="duration_ms">
                   <img src={clock} alt="" />
-                </th>
+                </td>
               </tr>
             </thead>
             <tbody>
               {PlaylistDetelis.tracks.items.map((item, index) => (
                 <tr key={index}>
-                  <td>{index + 1}</td>
-                  <td>{item.track.name},{item.track.album.release_date}</td>
-                  <td>{item.track.album.name}</td>
-                  <td>{item.track.album.release_date}</td>
-                  <td>{item.track.duration_ms}</td>
-                  <td>
-                    <img src={clock} alt="" />
+                  <td className="index">{index + 1}</td>
+                  <td className="name">
+                    <img src={item.track.album.images[0].url} alt="" />
+                    <span>
+                      <TruncateText text={item.track.name} maxLength={15} />
+                      <br></br>
+                      {item.track.album.release_date}
+                    </span>
                   </td>
+                  <td className="albom_name">{item.track.album.name}</td>
+                  <td className="reels">{item.track.album.release_date}</td>
+                  <td className="duration_ms">{item.track.duration_ms}</td>
                 </tr>
               ))}
             </tbody>

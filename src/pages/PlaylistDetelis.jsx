@@ -22,10 +22,11 @@ function PlaylistDetelis({
   playingTrack,
   isPlaying,
 }) {
-  const { PlaylistDetelis } = FetchZustand();
+  const { PlaylistDetelis,loading } = FetchZustand();
   const nav = useNavigate();
   const length = PlaylistDetelis.tracks?.items?.length;
-  const [loading, setLoading] = useState(false);
+
+  const { likedsong } = FetchZustand();
 
   useEffect(() => {
     setIsPlaying(true);
@@ -49,26 +50,6 @@ function PlaylistDetelis({
     const minutes = Math.floor(totalSeconds / 60);
     const seconds = totalSeconds % 60;
     return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
-  };
-
-  const likedsong = (track) => {
-    setLoading(true);
-    try {
-      const likedSongs = JSON.parse(localStorage.getItem("liked_songs")) || [];
-      const isLiked = likedSongs.some(
-        (likedTrack) => likedTrack.id === track.id
-      );
-      if (!isLiked) {
-        likedSongs.push(track);
-        localStorage.setItem("liked_songs", JSON.stringify(likedSongs));
-      }
-    } catch (error) {
-      console.error("Error adding liked song to localStorage:", error);
-    } finally {
-      setTimeout(() => {
-        setLoading(false);
-      }, 1500);
-    }
   };
 
   return (

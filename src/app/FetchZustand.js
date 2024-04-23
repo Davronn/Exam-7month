@@ -36,6 +36,8 @@ export const FetchZustand = create((set) => ({
     set((state) => ({ ...state, recentlyplayed: Recentlyplayed })),
   setMadeforyou: (Madeforyou) =>
     set((state) => ({ ...state, Madeforyou: Madeforyou })),
+  setLoading: (loading) => set({ isLoading: loading }),
+
   getToken: async () => {
     try {
       const response = await fetch(tokenUrl, {
@@ -171,5 +173,18 @@ export const FetchZustand = create((set) => ({
       console.log(error);
     }
   },
-  
+  likedsong: (track) => {
+    try {
+      const likedSongs = JSON.parse(localStorage.getItem("liked_songs")) || [];
+      const isLiked = likedSongs.some(
+        (likedTrack) => likedTrack.id === track.id
+      );
+      if (!isLiked) {
+        likedSongs.push(track);
+        localStorage.setItem("liked_songs", JSON.stringify(likedSongs));
+      }
+    } catch (error) {
+      console.error("Error adding liked song to localStorage:", error);
+    } 
+  },
 }));

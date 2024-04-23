@@ -9,11 +9,14 @@ function MusicControl({ playingTrack, isPlaying }) {
         url={playingTrack}
         controls
         playing={isPlaying}
+        volume={0.6}
         width="500px"
-        height="30px"
+        height="40px"
+        className="react_player"
         style={{
           display: "inline-block",
-          zIndex:"10",
+          color: "black",
+          backgroundColor:"black",
         }}
       />
     </div>

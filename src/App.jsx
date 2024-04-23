@@ -40,7 +40,17 @@ function App() {
                 />
               }
             />
-            <Route path="/like" element={<Like />} />
+            <Route
+              path="/like"
+              element={
+                <Like
+                  playingTrack={playingTrack}
+                  isPlaying={isPlaying}
+                  setPlayingTrack={setPlayingTrack}
+                  setIsPlaying={setIsPlaying}
+                />
+              }
+            />
             <Route path="*" element={<Error />} />
           </Routes>
           <DashboardRight />

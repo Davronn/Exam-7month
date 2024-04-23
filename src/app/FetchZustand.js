@@ -171,4 +171,5 @@ export const FetchZustand = create((set) => ({
       console.log(error);
     }
   },
+  
 }));

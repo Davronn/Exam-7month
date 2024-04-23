@@ -12,8 +12,8 @@ import {
   prev,
   pusk,
 } from "../assets/imgs";
-import ReactPlayer from "react-player";
-import MusicControl from "../components/MusicControl";
+
+import { useNavigate } from "react-router-dom";
 
 function PlaylistDetelis({
   setPlayingTrack,
@@ -22,9 +22,8 @@ function PlaylistDetelis({
   isPlaying,
 }) {
   const { PlaylistDetelis } = FetchZustand();
-  console.log(PlaylistDetelis.tracks.items.length);
-
-  const length = PlaylistDetelis.tracks.items.length;
+  const nav = useNavigate();
+  const length = PlaylistDetelis.tracks?.items?.length;
 
   useEffect(() => {
     setIsPlaying(true);
@@ -50,11 +49,26 @@ function PlaylistDetelis({
     return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
   };
 
+  const likedsong = (track) => {
+    try {
+      const likedSongs = JSON.parse(localStorage.getItem("liked_songs")) || [];
+      const isLiked = likedSongs.some(
+        (likedTrack) => likedTrack.id === track.id
+      );
+      if (!isLiked) {
+        likedSongs.push(track);
+        localStorage.setItem("liked_songs", JSON.stringify(likedSongs));
+      }
+    } catch (error) {
+      console.error("Error adding liked song to localStorage:", error);
+    }
+  };
+
   return (
     <div className="playlist_detelis">
       <div className="actions_playlist">
         <div className="imgs">
-          <img src={back} alt="" />
+          <img onClick={() => nav(-1)} src={back} alt="" />
           <img src={prev} alt="" />
         </div>
       </div>
@@ -134,7 +148,12 @@ function PlaylistDetelis({
                         maxLength={8}
                       />
                     </td>
-                    <td className="like_td">Like</td>
+                    <td
+                      onClick={() => likedsong(item.track)}
+                      className="like_td"
+                    >
+                      Like
+                    </td>
                     <td className="reels">{item.track.album.release_date}</td>
                     <td className="duration_ms">
                       {formatDuration(item.track.duration_ms)}
@@ -145,7 +164,6 @@ function PlaylistDetelis({
           </table>
         </div>
       </div>
-      {/* <MusicControl playingTrack={playingTrack} isPlaying={isPlaying} /> */}
     </div>
   );
 }

@@ -140,7 +140,6 @@
       .albom_name {
         width: 100px;
         font-size: 14px;
-
       }
       .like {
         width: 200px;
@@ -148,18 +147,19 @@
       .reels {
         width: 200px;
         font-size: 14px;
-
       }
       .duration_ms {
         width: 100px;
         font-size: 14px;
-
       }
       .like_td {
         width: 150px;
         display: flex;
         margin-left: 50px;
         cursor: pointer;
+      }
+      .active {
+        color: rgba(101, 211, 110, 1) !important;
       }
       .like_td:hover {
         color: rgba(101, 211, 110, 1);

@@ -57,7 +57,7 @@ function Home() {
           <div className="actions">
             <div className="imgs">
               <img src={back} alt="" />
-              <img src={prev} alt="" />
+              <img onClick={() => nav(+1)} src={prev} alt="" />
             </div>
             <h2 className="title">Good afternoon</h2>
           </div>

@@ -18,17 +18,7 @@ function App() {
         <div className="app">
           <DashboardLeft />
           <Routes>
-            <Route
-              path="/"
-              element={
-                <Home
-                  setPlayingTrack={setPlayingTrack}
-                  setIsPlaying={setIsPlaying}
-                  playingTrack={playingTrack}
-                  isPlaying={isPlaying}
-                />
-              }
-            />
+            <Route path="/" element={<Home />} />
             <Route
               path="/playlist"
               element={
